@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-dm: "DM Sans", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFF8F0;
+  color: #1A0A00;
+  font-family: "DM Sans", sans-serif;
+}
+
+.font-playfair {
+  font-family: "Playfair Display", Georgia, serif !important;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-orange text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:bg-orange-light active:scale-95 text-sm;
+  }
+  .btn-outline {
+    @apply border border-brand-border text-brand-dark font-medium px-6 py-3 rounded-xl transition-all duration-200 hover:bg-orange-pale text-sm;
+  }
+  .card {
+    @apply bg-white border border-brand-border rounded-2xl;
+  }
+  .section-heading {
+    @apply font-playfair text-2xl font-bold text-brand-dark;
+  }
+  .section-sub {
+    @apply text-brand-muted text-sm mt-1 mb-2;
+  }
+  .divider {
+    @apply w-10 h-0.5 bg-orange rounded-full my-3;
+  }
 }
