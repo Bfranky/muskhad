@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, Clock, Truck } from "lucide-react";
 import { BUSINESS, FEATURES } from "@/lib/data";
 import Link from "next/link";
 
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Header */}
       <section className="bg-gradient-to-br from-green to-[#0D2B1E] px-5 pt-10 pb-8 text-center">
         <h1 className="font-playfair text-3xl md:text-4xl font-black text-white mb-3">
           Our Story
@@ -23,7 +21,6 @@ export default function AboutPage() {
         </p>
       </section>
 
-      {/* Who We Are */}
       <section className="px-5 py-10 max-w-3xl mx-auto">
         <h2 className="section-heading">Who We Are</h2>
         <div className="divider" />
@@ -49,78 +46,49 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
       <section className="px-5 pb-10 max-w-3xl mx-auto">
         <h2 className="section-heading">Why Choose Muskhad</h2>
         <div className="divider" />
         <p className="section-sub mb-6">The four pillars we never compromise on</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {FEATURES.map((feat) => (
-            <div
-              key={feat.title}
-              className="card p-4 text-center hover:shadow-md transition-shadow duration-200"
-            >
+            <div key={feat.title} className="card p-4 text-center hover:shadow-md transition-shadow duration-200">
               <div className="text-3xl mb-2">{feat.icon}</div>
-              <h3 className="font-semibold text-brand-dark text-sm mb-1">
-                {feat.title}
-              </h3>
-              <p className="text-brand-muted text-xs leading-relaxed">
-                {feat.description}
-              </p>
+              <h3 className="font-semibold text-brand-dark text-sm mb-1">{feat.title}</h3>
+              <p className="text-brand-muted text-xs leading-relaxed">{feat.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Business Info */}
       <section className="px-5 pb-10 max-w-3xl mx-auto">
         <h2 className="section-heading">Find Us</h2>
         <div className="divider" />
         <div className="card p-5 space-y-4 mt-4">
-          <div className="flex items-start gap-3">
-            <MapPin className="w-5 h-5 text-orange mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-xs text-brand-muted font-semibold uppercase tracking-wider mb-1">
-                Address
-              </p>
-              <p className="text-sm text-brand-dark">{BUSINESS.address}</p>
+          {[
+            { icon: "📍", label: "Address", value: BUSINESS.address },
+            { icon: "📞", label: "Phone", value: BUSINESS.phoneDisplay, href: `tel:${BUSINESS.phone}` },
+            { icon: "🕐", label: "Hours", value: BUSINESS.hours },
+            { icon: "🛵", label: "Delivery", value: "Available — ask when you call" },
+          ].map((item) => (
+            <div key={item.label} className="flex items-start gap-3">
+              <span className="text-orange text-lg flex-shrink-0 mt-0.5">{item.icon}</span>
+              <div>
+                <p className="text-xs text-brand-muted font-semibold uppercase tracking-wider mb-0.5">
+                  {item.label}
+                </p>
+                {item.href ? (
+                  <a href={item.href} className="text-sm text-brand-dark hover:text-orange transition-colors">
+                    {item.value}
+                  </a>
+                ) : (
+                  <p className="text-sm text-brand-dark">{item.value}</p>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Phone className="w-5 h-5 text-orange flex-shrink-0" />
-            <div>
-              <p className="text-xs text-brand-muted font-semibold uppercase tracking-wider mb-1">
-                Phone
-              </p>
-              <a
-                href={`tel:${BUSINESS.phone}`}
-                className="text-sm text-brand-dark hover:text-orange transition-colors"
-              >
-                {BUSINESS.phoneDisplay}
-              </a>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Clock className="w-5 h-5 text-orange flex-shrink-0" />
-            <div>
-              <p className="text-xs text-brand-muted font-semibold uppercase tracking-wider mb-1">
-                Hours
-              </p>
-              <p className="text-sm text-brand-dark">{BUSINESS.hours}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Truck className="w-5 h-5 text-orange flex-shrink-0" />
-            <div>
-              <p className="text-xs text-brand-muted font-semibold uppercase tracking-wider mb-1">
-                Delivery
-              </p>
-              <p className="text-sm text-brand-dark">Available — ask when you call</p>
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* Map Placeholder */}
         <div className="mt-4 bg-green-light border border-green/30 rounded-2xl p-8 text-center">
           <div className="text-5xl mb-3">📍</div>
           <p className="font-semibold text-green text-base mb-1">Tarauni, Kano</p>
@@ -139,15 +107,12 @@ export default function AboutPage() {
         </a>
       </section>
 
-      {/* CTA */}
       <section className="mx-5 mb-10 max-w-3xl md:mx-auto">
         <div className="bg-orange rounded-2xl p-6 text-center">
           <h3 className="font-playfair text-xl font-bold text-white mb-2">
             Ready to Taste the Difference?
           </h3>
-          <p className="text-white/85 text-sm mb-4">
-            Order online or visit us at Tarauni, Kano
-          </p>
+          <p className="text-white/85 text-sm mb-4">Order online or visit us at Tarauni, Kano</p>
           <Link
             href="/contact"
             className="inline-block bg-white text-orange font-bold px-6 py-3 rounded-xl hover:bg-orange-pale active:scale-95 transition-all duration-200 text-sm"

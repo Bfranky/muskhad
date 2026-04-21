@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { BUSINESS } from "@/lib/data";
-import { MapPin, Phone, Clock, Fish } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="bg-brand-dark text-white/70 py-10 px-5">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Fish className="w-5 h-5 text-orange-light" />
+              <span className="text-orange-light text-xl">🐟</span>
               <h3 className="font-playfair text-white text-lg font-bold">
                 {BUSINESS.name}
               </h3>
@@ -24,33 +22,28 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
               Contact
             </h4>
             <div className="space-y-2 text-sm">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 text-orange-light flex-shrink-0" />
+                <span className="text-orange-light mt-0.5 flex-shrink-0">📍</span>
                 <span>{BUSINESS.address}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-orange-light flex-shrink-0" />
-                <a
-                  href={`tel:${BUSINESS.phone}`}
-                  className="hover:text-white transition-colors"
-                >
+                <span className="text-orange-light flex-shrink-0">📞</span>
+                <a href={`tel:${BUSINESS.phone}`} className="hover:text-white transition-colors">
                   {BUSINESS.phoneDisplay}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-orange-light flex-shrink-0" />
+                <span className="text-orange-light flex-shrink-0">🕐</span>
                 <span>{BUSINESS.hours}</span>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
               Quick Links
@@ -63,10 +56,7 @@ export default function Footer() {
                 { href: "/contact", label: "Contact & Order" },
               ].map((link) => (
                 <div key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-white transition-colors"
-                  >
+                  <Link href={link.href} className="hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </div>
@@ -76,8 +66,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved. |
-          Tarauni, Kano, Nigeria
+          © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved. | Tarauni, Kano, Nigeria
         </div>
       </div>
     </footer>

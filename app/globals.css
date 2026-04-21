@@ -1,6 +1,22 @@
 @import "tailwindcss";
 
-:root {
+@theme {
+  /* Colors */
+  --color-orange: #D4580A;
+  --color-orange-light: #F26B1D;
+  --color-orange-pale: #FFF0E6;
+
+  --color-green: #1B4332;
+  --color-green-mid: #2D6A4F;
+  --color-green-light: #D8F3DC;
+
+  --color-cream: #FFF8F0;
+
+  --color-brand-dark: #1A0A00;
+  --color-brand-muted: #6B4226;
+  --color-brand-border: #EDD5C0;
+
+  /* Fonts */
   --font-playfair: "Playfair Display", Georgia, serif;
   --font-dm: "DM Sans", sans-serif;
 }
@@ -10,32 +26,39 @@ html {
 }
 
 body {
-  background-color: #FFF8F0;
-  color: #1A0A00;
-  font-family: "DM Sans", sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-brand-dark);
+  font-family: var(--font-dm);
 }
 
 .font-playfair {
-  font-family: "Playfair Display", Georgia, serif !important;
+  font-family: var(--font-playfair) !important;
 }
 
-@layer components {
-  .btn-primary {
-    @apply bg-orange text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:bg-orange-light active:scale-95 text-sm;
-  }
-  .btn-outline {
-    @apply border border-brand-border text-brand-dark font-medium px-6 py-3 rounded-xl transition-all duration-200 hover:bg-orange-pale text-sm;
-  }
-  .card {
-    @apply bg-white border border-brand-border rounded-2xl;
-  }
-  .section-heading {
-    @apply font-playfair text-2xl font-bold text-brand-dark;
-  }
-  .section-sub {
-    @apply text-brand-muted text-sm mt-1 mb-2;
-  }
-  .divider {
-    @apply w-10 h-0.5 bg-orange rounded-full my-3;
-  }
+.card {
+  background: white;
+  border: 1px solid var(--color-brand-border);
+  border-radius: var(--radius-2xl);
+}
+
+.section-heading {
+  font-family: var(--font-playfair);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-brand-dark);
+}
+
+.section-sub {
+  color: var(--color-brand-muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.divider {
+  width: 2.5rem;
+  height: 2px;
+  background: var(--color-orange);
+  border-radius: 9999px;
+  margin: 0.75rem 0;
 }

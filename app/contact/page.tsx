@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Clock, Truck, CheckCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/data";
 
 interface FormData {
@@ -12,12 +11,7 @@ interface FormData {
 }
 
 export default function ContactPage() {
-  const [form, setForm] = useState<FormData>({
-    name: "",
-    phone: "",
-    items: "",
-    orderType: "",
-  });
+  const [form, setForm] = useState<FormData>({ name: "", phone: "", items: "", orderType: "" });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
@@ -38,11 +32,7 @@ export default function ContactPage() {
     setForm({ name: "", phone: "", items: "", orderType: "" });
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormData]) {
@@ -51,32 +41,14 @@ export default function ContactPage() {
   };
 
   const INFO_ITEMS = [
-    {
-      icon: <MapPin className="w-5 h-5 text-orange flex-shrink-0 mt-0.5" />,
-      label: "Address",
-      value: BUSINESS.address,
-    },
-    {
-      icon: <Phone className="w-5 h-5 text-orange flex-shrink-0" />,
-      label: "Phone",
-      value: BUSINESS.phoneDisplay,
-      href: `tel:${BUSINESS.phone}`,
-    },
-    {
-      icon: <Clock className="w-5 h-5 text-orange flex-shrink-0" />,
-      label: "Hours",
-      value: BUSINESS.hours,
-    },
-    {
-      icon: <Truck className="w-5 h-5 text-orange flex-shrink-0" />,
-      label: "Delivery",
-      value: "Available — ask when you call",
-    },
+    { icon: "📍", label: "Address", value: BUSINESS.address },
+    { icon: "📞", label: "Phone", value: BUSINESS.phoneDisplay, href: `tel:${BUSINESS.phone}` },
+    { icon: "🕐", label: "Hours", value: BUSINESS.hours },
+    { icon: "🛵", label: "Delivery", value: "Available — ask when you call" },
   ];
 
   return (
     <>
-      {/* Header */}
       <section className="bg-orange px-5 pt-10 pb-8 text-center">
         <h1 className="font-playfair text-3xl md:text-4xl font-black text-white mb-2">
           Get In Touch
@@ -87,7 +59,6 @@ export default function ContactPage() {
       </section>
 
       <div className="max-w-3xl mx-auto px-5 py-8 grid md:grid-cols-2 gap-8">
-        {/* LEFT: Contact Info */}
         <div>
           <h2 className="section-heading mb-1">Contact Info</h2>
           <div className="divider" />
@@ -95,16 +66,13 @@ export default function ContactPage() {
           <div className="card p-5 mt-4 space-y-4">
             {INFO_ITEMS.map((item) => (
               <div key={item.label} className="flex items-start gap-3">
-                {item.icon}
+                <span className="text-orange text-lg flex-shrink-0 mt-0.5">{item.icon}</span>
                 <div>
                   <p className="text-xs text-brand-muted font-semibold uppercase tracking-wider mb-0.5">
                     {item.label}
                   </p>
                   {item.href ? (
-                    <a
-                      href={item.href}
-                      className="text-sm text-brand-dark hover:text-orange transition-colors"
-                    >
+                    <a href={item.href} className="text-sm text-brand-dark hover:text-orange transition-colors">
                       {item.value}
                     </a>
                   ) : (
@@ -115,7 +83,6 @@ export default function ContactPage() {
             ))}
           </div>
 
-          {/* Quick Action Buttons */}
           <div className="mt-4 space-y-3">
             <a
               href={`tel:${BUSINESS.phone}`}
@@ -134,17 +101,14 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* RIGHT: Order Form */}
         <div>
           <h2 className="section-heading mb-1">Place an Order</h2>
           <div className="divider" />
 
           {submitted ? (
             <div className="mt-4 card p-6 text-center">
-              <CheckCircle className="w-12 h-12 text-green mx-auto mb-3" />
-              <h3 className="font-playfair text-lg font-bold text-brand-dark mb-2">
-                Order Received!
-              </h3>
+              <div className="text-5xl mb-3">✅</div>
+              <h3 className="font-playfair text-lg font-bold text-brand-dark mb-2">Order Received!</h3>
               <p className="text-brand-muted text-sm mb-4">
                 We&apos;ll call you shortly to confirm your order. Thank you!
               </p>
@@ -157,86 +121,48 @@ export default function ContactPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-4 space-y-4" noValidate>
-              {/* Name */}
               <div>
-                <label className="block text-sm font-semibold text-brand-dark mb-1.5">
-                  Your Name
-                </label>
+                <label className="block text-sm font-semibold text-brand-dark mb-1.5">Your Name</label>
                 <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
+                  type="text" name="name" value={form.name} onChange={handleChange}
                   placeholder="e.g. Amina Ibrahim"
-                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange ${
-                    errors.name ? "border-red-400" : "border-brand-border"
-                  }`}
+                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange ${errors.name ? "border-red-400" : "border-brand-border"}`}
                 />
-                {errors.name && (
-                  <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-                )}
+                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
               </div>
 
-              {/* Phone */}
               <div>
-                <label className="block text-sm font-semibold text-brand-dark mb-1.5">
-                  Phone Number
-                </label>
+                <label className="block text-sm font-semibold text-brand-dark mb-1.5">Phone Number</label>
                 <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
+                  type="tel" name="phone" value={form.phone} onChange={handleChange}
                   placeholder="e.g. 080xxxxxxxx"
-                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange ${
-                    errors.phone ? "border-red-400" : "border-brand-border"
-                  }`}
+                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange ${errors.phone ? "border-red-400" : "border-brand-border"}`}
                 />
-                {errors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                )}
+                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
               </div>
 
-              {/* Items */}
               <div>
-                <label className="block text-sm font-semibold text-brand-dark mb-1.5">
-                  What would you like?
-                </label>
+                <label className="block text-sm font-semibold text-brand-dark mb-1.5">What would you like?</label>
                 <textarea
-                  name="items"
-                  value={form.items}
-                  onChange={handleChange}
+                  name="items" value={form.items} onChange={handleChange}
                   placeholder="e.g. 1 grilled catfish, 2 fried chicken, 1 jollof rice..."
                   rows={3}
-                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange resize-none ${
-                    errors.items ? "border-red-400" : "border-brand-border"
-                  }`}
+                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange resize-none ${errors.items ? "border-red-400" : "border-brand-border"}`}
                 />
-                {errors.items && (
-                  <p className="text-red-500 text-xs mt-1">{errors.items}</p>
-                )}
+                {errors.items && <p className="text-red-500 text-xs mt-1">{errors.items}</p>}
               </div>
 
-              {/* Order Type */}
               <div>
-                <label className="block text-sm font-semibold text-brand-dark mb-1.5">
-                  Order Type
-                </label>
+                <label className="block text-sm font-semibold text-brand-dark mb-1.5">Order Type</label>
                 <select
-                  name="orderType"
-                  value={form.orderType}
-                  onChange={handleChange}
-                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange ${
-                    errors.orderType ? "border-red-400" : "border-brand-border"
-                  }`}
+                  name="orderType" value={form.orderType} onChange={handleChange}
+                  className={`w-full bg-white border rounded-xl px-4 py-3 text-sm text-brand-dark outline-none transition-colors focus:border-orange ${errors.orderType ? "border-red-400" : "border-brand-border"}`}
                 >
                   <option value="">Select...</option>
                   <option value="delivery">Delivery</option>
                   <option value="pickup">Pickup</option>
                 </select>
-                {errors.orderType && (
-                  <p className="text-red-500 text-xs mt-1">{errors.orderType}</p>
-                )}
+                {errors.orderType && <p className="text-red-500 text-xs mt-1">{errors.orderType}</p>}
               </div>
 
               <button

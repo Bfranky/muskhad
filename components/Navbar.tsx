@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Fish } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -20,18 +19,16 @@ export default function Navbar() {
     <>
       <nav className="sticky top-0 z-50 bg-green shadow-md">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 font-playfair text-white text-lg font-bold"
             onClick={() => setOpen(false)}
           >
-            <Fish className="w-5 h-5 text-orange-light" />
+            <span className="text-orange-light text-xl">🐟</span>
             Muskhad
-            <span className="text-orange-light">Fish & Chicken</span>
+            <span className="text-orange-light">Fish &amp; Chicken</span>
           </Link>
 
-          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <Link
@@ -54,18 +51,16 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Hamburger */}
           <button
             className="md:hidden text-white p-1"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span className="text-2xl leading-none">{open ? "✕" : "☰"}</span>
           </button>
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
       {open && (
         <div className="fixed inset-0 top-14 bg-green z-40 flex flex-col p-6 gap-2 md:hidden">
           {NAV_LINKS.map((link) => (
